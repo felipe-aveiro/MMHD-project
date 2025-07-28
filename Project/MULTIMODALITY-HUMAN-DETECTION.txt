@@ -1,0 +1,111 @@
+https://encord.com/blog/train-val-test-split/#:~:text=The%20optimal%20split%20ratio%20depends,10%2D20%25%20test%20data.
+
+-- Might be interesting for data augmentation
+
+Step 1)
+    RGB - YOLO (3 channels)
+
+Step 2)
+    Thermal - YOLO (1 channel)
+    • use 'trick' to expand to three channels
+
+✅ Fine-tuning Parameter:
+
+    📦 epochs = 50
+
+        🧠 What it does:
+            Specifies the number of times the model will go through the entire training dataset.
+            Higher values allow the model to learn more — but can lead to overfitting if excessive.
+
+        📌 Importance for fine-tuning:
+            Very high — this controls how much the model adapts to your custom dataset.
+
+        📈 Typical tuning values:
+
+            Small datasets: 50–200 epochs
+
+            Large datasets: depends on compute resources and training time
+
+        ✅ Yes, you can change this later. Just modify the value and re-run the training:
+
+            python
+                model.train(epochs=100, ...)
+    
+    📦 YOLO('yolov8s.pt')
+
+        🧠 What it does:
+            This loads a pre-trained YOLOv8 model architecture with pretrained weights (.pt file).
+            In this case: YOLOv8s → "small" version of the model.
+
+        📌 Importance for fine-tuning:
+            Critical. You’re initializing the model with weights learned from the COCO dataset — meaning the model already has some understanding of object detection.
+
+        🧬 This is the starting point for fine-tuning — you’ll then adapt it to your custom dataset (e.g., thermal or RGB humans only).
+
+        📊 Available Model Sizes:
+        
+            Model	        Size	Speed	         Accuracy	         Use Case
+
+            yolov8n.pt	    nano	🟢 Fast	        🔴 Low	            Real-time or edge devices
+            yolov8s.pt	    small	🟢 Fast	        🟡 Medium	        Balanced use cases
+            yolov8m.pt	    medium	🟡 Medium	    🟢 Good	            More accurate, slower
+            yolov8l.pt	    large	🔴 Slow	        🟢 High	            Heavy training, better accuracy
+            yolov8x.pt	    x-large	🔴 Very slow	🟢 Best	            Research or high-end training
+
+        ✅ You can switch models easily:
+
+            python
+                model = YOLO('yolov8n.pt')  # if you want speed
+                model = YOLO('yolov8m.pt')  # if you want more accuracy
+
+                        yolov8n.pt (nano)	        yolov8s.pt (small)
+
+            Speed	    ⚡ Fastest	               🔄 Fast
+            Size	    💾 Tiny (~3.2MB)	        📦 Small (~11MB)
+            Accuracy	❗ Lower	                    ✅ Better than nano
+            Ideal for	Real-time, embedded	         Desktop, quick protos
+
+            ** yolov8n is less accurate, so for proof of concept/benchmarks,
+            you may still want to compare yolov8n vs yolov8s performance side-by-side.
+
+    📦 patience=num_epochs
+
+        🧠 What it does:
+            Controls early stopping — training will stop if validation loss doesn’t improve after patience epochs.
+
+        📌 Why it matters:
+            Setting patience = num_epochs disables early stopping.
+            This ensures the model trains for the full number of epochs, regardless of performance.
+
+        ❗  Recommendation:
+            ✅ Good as-is while experimenting. You can lower later if overfitting starts.
+    
+    📦 pretrained=False
+
+        🧠 What it does:
+            If False: fine-tunes from scratch using the weights in 'yolov8n.pt' (learned from COCO).
+            If True: resumes training from a previous fine-tuned model (runs/.../weights/best.pt).
+
+        📌 Why it matters:
+            Setting False means you’re doing transfer learning from generic COCO weights.
+            If you already trained before and want to continue — set to True.
+
+        ❗  Recommendation:
+            ✅ Leave it as False for your first full training.
+    
+    📦 imgsz=640
+
+        🧠 What it does:
+            Sets the image resolution used during training (images will be resized to this).
+
+        📌 Why it matters:
+            Lower values → faster training, but potentially less accurate.
+            Higher values → slower, but potentially better detection (especially for small objects).
+
+        🔄 Tradeoff:
+            416 for real-time focus
+            640 (default) is balanced
+            768+ if you need fine-grained detection
+
+        ❗  Recommendation:
+            ✅ Stick with 640 for now. You can test others later during tuning.
