@@ -17,7 +17,7 @@ def build_output_path(split):
     }
 
 # Collect and shuffle all image files
-image_files = [f for f in os.listdir(images_dir) if f.endswith(('.jpg', '.png'))]
+image_files = [f for f in os.listdir(images_dir) if f.endswith(('.png'))]
 random.shuffle(image_files)
 
 # Split sizes

@@ -8,7 +8,7 @@ BASE_DIR_rgb = os.path.abspath(os.path.join(os.path.dirname(__file__),"..", "MID
 rgb_yaml_content = f"""
 path: {BASE_DIR_rgb}/dataset/rgb
 train: train/rgb/
-val: val/rgb/
+val: validation/rgb/
 test: test/rgb/
 # class names
 names:
