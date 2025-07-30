@@ -28,12 +28,27 @@ names:
   0: human
 """
 
+# DEPTH YAML
+depth_yaml_path = os.path.join(BASE_DIR, "dataset", "depth.yaml")
+depth_yaml_content = f"""
+path: {BASE_DIR}/dataset/depth
+train: train/depth
+val: val/depth
+test: test/depth
+names:
+  0: human
+"""
+
 # Save
 with open(rgb_yaml_path, "w") as f:
     f.write(rgb_yaml_content.strip())
 
 with open(thermal_yaml_path, "w") as f:
     f.write(thermal_yaml_content.strip())
+    
+with open(depth_yaml_path, "w") as f:
+    f.write(depth_yaml_content.strip())
+
 
 print("✅ Checkpoint:\n")
 print("\t📄 ", rgb_yaml_path)
@@ -97,6 +112,34 @@ model_thermal.train(
     plots = True # TO SHOW PLOTS OF TRAINING AND VALIDATION METRICS
 )
 
+#REMOVE OTHERS THERMAL FOLDERS
+if os.path.exists("RML-project-MMHD/depth"):
+    shutil.rmtree("RML-project-MMHD/depth")
+
+# Training parameters
+# NUMBER OF EPOCHS TO TRAIN
+num_epochs_depth = 50
+
+# LOAD YOLOv8 SMALL MODEL FOR DEPTH MODALITY (nano, small, medium...)
+model_depth = YOLO('yolov8s.pt') # LOAD YOLO MODEL FOR TRAINNING Ex.: yolov8n.pt, yolov8s.pt, yolov8m.pt ...
+
+depth_yaml_path = os.path.join(BASE_DIR, "dataset", "depth.yaml")
+
+# Start training
+#https://docs.ultralytics.com/usage/cfg/#train-settings
+model_depth.train(
+    pretrained = False, # DEFINE IF USE PRETRAINED WEIGHTS
+    data = depth_yaml_path, # DATASET CONFIG FILE
+    epochs = num_epochs_depth, #NUMBER OF EPOCHS
+    device = 0 if torch.cuda.is_available() else 'cpu', # USE GPU
+    patience = num_epochs_depth, # SET patience = num_epochs_depth TO DISABLE EARLY STOP
+    imgsz = 640, # TO REZISE IMAGES, DEFAULT 640
+    save = True, # TO SAVE CHECKPOINTS AND FINAL MODEL WEIGHTS
+    project='RML-project-MMHD', #NAME OF PROJECT
+    name = 'depth', # SUB-NAME OF PROJECT or MODALITY
+    plots = True # TO SHOW PLOTS OF TRAINING AND VALIDATION METRICS
+)
+
 # https://docs.ultralytics.com/modes/val/#arguments-for-yolo-model-validation
 # Evaluate on the test set
 results_test_rgb = model_rgb.val(
@@ -114,5 +157,14 @@ results_test_thermal = model_thermal.val(
     split='test',
     project='RML-project-MMHD',
     name='test_eval_thermal',
+    plots=True
+)
+# https://docs.ultralytics.com/modes/val/#arguments-for-yolo-model-validation
+# Evaluate on the test set
+results_test_depth = model_depth.val(
+    data='depth.yaml',
+    split='test',
+    project='RML-project-MMHD',
+    name='test_eval_depth',
     plots=True
 )
