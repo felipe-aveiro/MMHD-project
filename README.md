@@ -27,6 +27,7 @@ The goal is to explore and compare the performance of **YOLOv8 models** for **hu
 ## 📁 Project Structure
 ```
 MMHD-project/
+|
 ├── README.md # 📌 This file!
 |
 ├── MID-3K/ # Dataset base
@@ -60,7 +61,7 @@ MMHD-project/
 ├── yolo11n.pt # Pretrained YOLOv11n model weights
 ├── yolov8s.pt # Pretrained YOLOv8s model weights
 |
-└── *.ipynb # Colab notebook
+└── MMHD_project.ipynb # Colab notebook
 ```
 
 ---
