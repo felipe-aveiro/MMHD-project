@@ -7,7 +7,7 @@ The goal is to explore and compare the performance of **YOLOv8 models** for **hu
 
 ## 🎯 Objectives
 
-- ✅ Train YOLOv8 models for **RGB** and **thermal** images
+- ✅ Train YOLOv8 models for **RGB**, **thermal**, and **depth** images
 - ✅ Evaluate and compare performances across modalities
 - ✅ Perform inference and visualize predictions
 - ✅ Prepare for possible sensor fusion in real-world applications
@@ -18,28 +18,48 @@ The goal is to explore and compare the performance of **YOLOv8 models** for **hu
 
 | Modality | Model Used | Input Size | Dataset |
 |----------|------------|------------|------------|
-| RGB      | YOLOv8s    | 640×640    | [MID-3K RGB subset](https://github.com/felipe-aveiro/MMHD-project/MID-3K/dataset/rgb) |
-| Thermal  | YOLOv8s    | 640×640    | [MID-3K Thermal subset](https://github.com/felipe-aveiro/MMHD-project/dataset/thermal) |
+| RGB      | YOLOv8s    | 640×512    | [MID-3K RGB subset](https://github.com/felipe-aveiro/MMHD-project/MID-3K/dataset/rgb) |
+| Thermal  | YOLOv8s    | 640×512    | [MID-3K Thermal subset](https://github.com/felipe-aveiro/MMHD-project/dataset/thermal) |
+| Depth  | YOLOv8s    | 640×512    | [MID-3K Depth subset](https://github.com/felipe-aveiro/MMHD-project/dataset/depth) |
 
 ---
 
 ## 📁 Project Structure
 ```
 MMHD-project/
+├── README.md # 📌 This file!
+|
 ├── MID-3K/ # Dataset base
 │ └── dataset/
 │   ├── rgb/ # RGB images and labels (split & full)
 │   ├── thermal/ # Thermal images and labels (split & full)
-│   ├── rgb.yaml
-│   └── thermal.yaml
+│   └── depth/ # Depth images and labels (split & full)
 |
-├── Project/ # Training outputs (weights, metrics)
+├── Project/ # Scripts and project related files
 |   ├── dataset-separator.py # Python script to split dataset
 |   ├── RML-project-MMHD.py # Python script to train models
 |   ├── MULTIMODALITY-HUMAN-DETECTION.txt # Project pipeline
 │   └── README-MultimodalISRDataset.md # README file with description on dataset
 |
-├── README.md # 📌 This file!
+├── RML-project-MMHD/ # Contains training outputs of each modality
+|   ├── rgb/ # YOLO training results for RGB modality (metrics, predictions, weights)
+|   ├── thermal/ # YOLO training results for thermal modality (metrics, predictions, weights)
+|   ├── depth/ # YOLO training results for depth modality (metrics, predictions, weights)
+|   ├── test_eval_rgb/ # Validation metrics and plots on test set using RGB-trained model
+|   ├── test_eval_thermal/ # Validation metrics and plots on test set using thermal-trained model
+|   └── test_eval_depth/ # Validation metrics and plots on test set using depth-trained model
+|
+├── RML-project-MMHD.zip # Zipped folder
+|
+├── predictions # Inference results
+|
+├── rgb.yaml # Configuration file for training with RGB images
+├── thermal.yaml # Configuration file for training with thermal images
+├── depth.yaml # Configuration file for training with depth images
+|
+├── yolo11n.pt # Pretrained YOLOv11n model weights
+├── yolov8s.pt # Pretrained YOLOv8s model weights
+|
 └── *.ipynb # Colab notebook
 ```
 
