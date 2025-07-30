@@ -1,0 +1,7 @@
+path: /content/MMHD-project/MID-3K/dataset/thermal
+train: train/thermal/
+val: val/thermal/
+test: test/thermal/
+# class names
+names:
+  0: human

@@ -1,0 +1,7 @@
+path: /content/MMHD-project/MID-3K/dataset/depth
+train: train/depth/
+val: val/depth/
+test: test/depth/
+# class names
+names:
+  0: human

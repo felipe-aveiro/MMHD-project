@@ -1,0 +1,7 @@
+path: /content/MMHD-project/MID-3K/dataset/rgb
+train: train/rgb/
+val: val/rgb/
+test: test/rgb/
+# class names
+names:
+  0: human
