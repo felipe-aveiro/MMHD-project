@@ -113,3 +113,24 @@ Step 2)
 
         ❗  Recommendation:
             ✅ Stick with 640 for now. You can test others later during tuning.
+
+---
+
+# Late fusion
+
+• NMS - non-maximum supression (maximum in the 4 directions of a bgiven bounding box)
+• Voting
+
+# Early fusion
+
+• Concatenation
+
+
+* Gray scale to separate RGB
+
+=> BENCHMARK EARLY AND LATE FUSION TECHNIQUES FOR HUMAN DETECTION INFERENCE
+• Introduction - contextualize
+• Methodology
+• Discussions & Results
+• Conclusions
+• References
