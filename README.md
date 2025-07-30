@@ -50,8 +50,6 @@ MMHD-project/
 |   ├── test_eval_thermal/ # Validation metrics and plots on test set using thermal-trained model
 |   └── test_eval_depth/ # Validation metrics and plots on test set using depth-trained model
 |
-├── RML-project-MMHD.zip # Zipped folder
-|
 ├── predictions # Inference results
 |
 ├── rgb.yaml # Configuration file for training with RGB images
