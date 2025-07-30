@@ -2,6 +2,10 @@ https://encord.com/blog/train-val-test-split/#:~:text=The%20optimal%20split%20ra
 
 -- Might be interesting for data augmentation
 
+https://labelstud.io/
+
+-- Open source data labeling tool
+
 Step 1)
     RGB - YOLO (3 channels)
 

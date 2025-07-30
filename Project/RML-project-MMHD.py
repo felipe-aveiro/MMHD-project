@@ -1,6 +1,6 @@
 from ultralytics import YOLO #  use YOLOv8
-import matplotlib.pyplot as plt
 import shutil
+import torch
 from PIL import Image
 import os
 
@@ -39,6 +39,8 @@ print("✅ Checkpoint:\n")
 print("\t📄 ", rgb_yaml_path)
 print("\t📄 ", thermal_yaml_path)
 
+print("🏃‍♂️💨 Using GPU..." if torch.cuda.is_available() else "🐌 Using CPU...")
+
 #REMOVE OTHERS RGB FOLDERS
 if os.path.exists("RML-project-MMHD/rgb"):
     shutil.rmtree("RML-project-MMHD/rgb")
@@ -58,7 +60,7 @@ model_rgb.train(
     pretrained = False, # DEFINE IF USE PRETRAINED WEIGHTS
     data = rgb_yaml_path, # DATASET CONFIG FILE
     epochs = num_epochs_rgb, #NUMBER OF EPOCHS
-    device = 0, # USE GPU
+    device = 0 if torch.cuda.is_available() else 'cpu', # USE GPU
     patience = num_epochs_rgb, # SET patience = num_epochs_rgb TO DISABLE EARLY STOP
     imgsz = 640, # TO REZISE IMAGES, DEFAULT 640
     save = True, # TO SAVE CHECKPOINTS AND FINAL MODEL WEIGHTS
@@ -86,7 +88,7 @@ model_thermal.train(
     pretrained = False, # DEFINE IF USE PRETRAINED WEIGHTS
     data = thermal_yaml_path, # DATASET CONFIG FILE
     epochs = num_epochs_thermal, #NUMBER OF EPOCHS
-    device = 0, # USE GPU
+    device = 0 if torch.cuda.is_available() else 'cpu', # USE GPU
     patience = num_epochs_thermal, # SET patience = num_epochs_thermal TO DISABLE EARLY STOP
     imgsz = 640, # TO REZISE IMAGES, DEFAULT 640
     save = True, # TO SAVE CHECKPOINTS AND FINAL MODEL WEIGHTS
