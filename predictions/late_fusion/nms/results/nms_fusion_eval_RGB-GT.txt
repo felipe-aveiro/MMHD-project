@@ -1,0 +1,1 @@
+mAP@0.5 (NMS Fusion, RGB GT): 0.005252
