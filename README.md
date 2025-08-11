@@ -1,6 +1,6 @@
-# 🤖 **MMHD-project - Multi-Modality Human Detection**
+# 🤖 **MMHD-project - Multimodality Human Detection**
 
-**MMHD** (Multi-Modality Human Detection) is a research-oriented project developed for the **Robotics and Machine Learning** course at the **University of Coimbra**.  
+**MMHD** (Multimodality Human Detection) is a research-oriented project developed for the **Robotics and Machine Learning** course at the **University of Coimbra**.  
 The goal is to explore and compare the performance of **YOLOv8 models** for **human detection** using **RGB**, **thermal**, and **depth image modalities**, individually and in a fusion-based setup.
 
 🎓🏆 **Approved with Highest Honors!**
@@ -106,4 +106,4 @@ University of Coimbra
 
 - [**MID-3K** (Multimodal ISR Dataset with 3000 images)](https://github.com/kennedyk1/MID-3K)
 
-- [**AAU-VAP Dataset**](https://www.kaggle.com/datasets/aalborguniversity/trimodal-people-segmentation)
+- [**AAU-VAP Trimodal People Segmentation Dataset**](https://www.kaggle.com/datasets/aalborguniversity/trimodal-people-segmentation)
