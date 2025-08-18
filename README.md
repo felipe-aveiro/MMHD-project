@@ -3,7 +3,7 @@
 **MMHD** (Multimodality Human Detection) is a research-oriented project developed for the **Robotics and Machine Learning** course at the **University of Coimbra**.  
 The goal is to explore and compare the performance of **YOLOv8 models** for **human detection** using **RGB**, **thermal**, and **depth image modalities**, individually and in a fusion-based setup.
 
-🎓🏆 **Approved with Highest Honors!**
+🎓🏆 **Approved with the Highest Honors!**
 
 ---
 
@@ -94,7 +94,7 @@ MMHD-project/
 **_Master's in Mechanical Engineering_**,
 _Robotics and Machine Learning (2025)_
 
-🎓🏆 **Approved with Highest Honors**
+🎓🏆 **Approved with the Highest Honors**
 
 University of Coimbra
 
